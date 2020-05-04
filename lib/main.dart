@@ -8,7 +8,7 @@ void main() {
       home: Scaffold(
         backgroundColor: Colors.red,
         appBar: AppBar(
-          title: Text('Dicee'),
+          title: Text('Roll-the-die'),
           backgroundColor: Colors.red,
         ),
         body: DicePage(),
@@ -26,7 +26,12 @@ class _DicePageState extends State<DicePage> {
   int leftButtonPressed = 1,
       rightButtonPressed = 1;
   Random random = new Random();
-
+  void changeDieValue(){
+    setState(() {
+      leftButtonPressed = random.nextInt(6) + 1;
+      rightButtonPressed = random.nextInt(6) + 1;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -35,13 +40,7 @@ class _DicePageState extends State<DicePage> {
           Expanded(
             child: FlatButton(
               onPressed: () {
-                int randomNumber = random.nextInt(6) + 1;
-                if(randomNumber == leftButtonPressed){
-                  randomNumber = random.nextInt(6) + 1;
-                }
-                setState(() {
-                  leftButtonPressed = randomNumber;
-                });
+                changeDieValue();
               },
               child: Image.asset('images/dice$leftButtonPressed.png'),
             ),
@@ -49,13 +48,7 @@ class _DicePageState extends State<DicePage> {
           Expanded(
             child: FlatButton(
               onPressed: () {
-                int randomNumber = random.nextInt(6) + 1;
-                if(randomNumber == rightButtonPressed){
-                  randomNumber = random.nextInt(6) + 1;
-                }
-                setState(() {
-                  rightButtonPressed = randomNumber;
-                });
+                changeDieValue();
               },
               child: Image.asset('images/dice$rightButtonPressed.png'),
             ),
